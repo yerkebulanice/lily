@@ -8,7 +8,7 @@ part 'type_event.dart';
 part 'type_state.dart';
 
 class TypeBloc extends Bloc<TypeEvent, TypeState> {
-  final List<Type> types = [
+  List<Type> types = [
     Type(
       name: 'Bouquets',
       flowers: [
@@ -77,13 +77,22 @@ class TypeBloc extends Bloc<TypeEvent, TypeState> {
   }
 
   Future<void> changeType(ChangeTypeEvent event, Emitter<TypeState> emit) async {
-    for (int i = 0; i < types.length; i++) {
+    print('Index: ${event.index}');
+
+    // Create a new list by copying the current state
+    List<Type> changedType = List.from(types);
+
+    for (int i = 0; i < changedType.length; i++) {
       if (i == event.index) {
-        types[i].select();
+        changedType[i] = changedType[i].copyWith(isSelected: true); // Create a new instance with updated state
       } else {
-        types[i].diselect();
+        changedType[i] = changedType[i].copyWith(isSelected: false); // Deselect others
       }
     }
-    emit(ChangeTypeState(types));
+
+    print('TYPES: ${changedType.map((e) => e.isSelected)}');
+
+    // Emit the new state with the updated list
+    emit(ChangeTypeState(List.from(changedType))); // Ensure immutability by emitting a new list
   }
 }

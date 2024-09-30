@@ -15,17 +15,29 @@ class HomeTabWidget extends StatefulWidget {
 }
 
 class _HomeTabWidgetState extends State<HomeTabWidget> {
+  late TypeBloc bloc;
+
+  @override
+  void initState() {
+    bloc = globalSL<TypeBloc>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return Column(
       children: [
         BlocConsumer<TypeBloc, TypeState>(
-          bloc: globalSL<TypeBloc>(),
+          bloc: bloc,
           listener: (context, state) {
-            if (state is ChangeTypeState) {}
+            print('State Lis is: $state');
+            if (state is ChangeTypeState) {
+              setState(() {});
+            }
           },
           builder: (context, state) {
+            print('State is :$state');
             if (state is ChangeTypeState) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -51,11 +63,11 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
         24.ph,
         GridView.builder(
           shrinkWrap: true,
-          itemCount: globalSL<TypeBloc>().getSelected.flowers.length,
+          itemCount: bloc.getSelected.flowers.length,
           primary: false,
           itemBuilder: (BuildContext context, int index) {
             return ProductItem(
-              flower: globalSL<TypeBloc>().getSelected.flowers[index],
+              flower: bloc.getSelected.flowers[index],
             );
           },
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -72,7 +84,7 @@ class _HomeTabWidgetState extends State<HomeTabWidget> {
   Widget _buildTab(CustomThemeExtension theme, String name, bool isSelected, int index) {
     return GestureDetector(
       onTap: () {
-        globalSL<TypeBloc>().add(ChangeTypeEvent(index));
+        bloc.add(ChangeTypeEvent(index));
       },
       child: SizedBox(
         height: 30.h,

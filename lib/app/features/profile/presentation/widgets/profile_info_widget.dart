@@ -25,7 +25,7 @@ class ProfileInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return SizedBox(
-      height: 107.h,
+      // height: 107.h,
       child: Row(
         children: [
           CustomImageWidget(
@@ -35,33 +35,31 @@ class ProfileInfoWidget extends StatelessWidget {
             borderRadius: 8.sp,
           ),
           16.pw,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Jennie Kim',
-                  style: theme.headline1.copyWith(color: Colors.black),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Jennie Kim',
+                style: theme.headline1.copyWith(color: Colors.black),
+              ),
+              12.ph,
+              Text(
+                'agaziz157@gmail.com\n+7 708 697 34 48',
+                style: theme.headline2.copyWith(
+                  color: Colors.black.withOpacity(0.6),
                 ),
-                12.ph,
-                Text(
-                  'agaziz157@gmail.com\n+7 708 697 34 48',
-                  style: theme.headline2.copyWith(
-                    color: Colors.black.withOpacity(0.6),
-                  ),
+              ),
+              // const Expanded(child: SizedBox.shrink()),
+              GestureDetector(
+                onTap: () {
+                  globalSL<AuthNavigation>().globalRouter.push(AuthNavigation.editProfile);
+                },
+                child: Text(
+                  'Edit profile',
+                  style: theme.headline4.copyWith(color: Colors.black),
                 ),
-                const Expanded(child: SizedBox.shrink()),
-                GestureDetector(
-                  onTap: () {
-                    globalSL<AuthNavigation>().globalRouter.push(AuthNavigation.editProfile);
-                  },
-                  child: Text(
-                    'Edit profile',
-                    style: theme.headline4.copyWith(color: Colors.black),
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           )
         ],
       ),

@@ -11,6 +11,19 @@ class Type {
     this.isSelected = false,
   });
 
+  // Method to copy the current instance and modify specific fields
+  Type copyWith({
+    String? name,
+    List<Flower>? flowers,
+    bool? isSelected,
+  }) {
+    return Type(
+      name: name ?? this.name,
+      flowers: flowers ?? this.flowers,
+      isSelected: isSelected ?? this.isSelected,
+    );
+  }
+
   void diselect() {
     isSelected = false;
   }

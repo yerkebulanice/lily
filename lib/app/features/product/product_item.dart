@@ -31,7 +31,7 @@ class ProductItem extends StatelessWidget {
                 ),
               ),
               padding: EdgeInsets.only(
-                top: 10.h,
+                // top: 10.h,
                 right: 20.w,
                 left: 20.w,
                 bottom: 20.h,
@@ -43,7 +43,7 @@ class ProductItem extends StatelessWidget {
                     height: 150.h,
                     child: Image.asset(flower.image),
                   ),
-                  12.ph,
+                  // 12.ph,
                   Text(
                     flower.name,
                     style: theme.headline4,
@@ -52,8 +52,8 @@ class ProductItem extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   8.ph,
-                  Expanded(child: Text('${flower.price} KZT', style: theme.headline2)),
-                  15.ph,
+                  Text('${flower.price} KZT', style: theme.headline2),
+                  // 15.ph,
                 ],
               ),
             ),
